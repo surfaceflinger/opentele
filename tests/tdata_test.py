@@ -36,12 +36,20 @@ from src.tl.telethon import TelegramClient
 from src.api import API, APIData, CreateNewSession, UseCurrentSession
 from telethon.errors.rpcerrorlist import FreshResetAuthorisationForbiddenError
 
+import asyncio
 import pytest
 import typing as t
 from _pytest._io import TerminalWriter
 
 X1 = "!thedemons#opentele"
 X2 = "opentele#thedemons!"
+
+
+@pytest.fixture(scope="module")
+def event_loop():
+    loop = asyncio.new_event_loop()
+    yield loop
+    loop.close()
 
 
 def PythonVersion():
